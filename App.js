@@ -1,13 +1,55 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useState, useEffect } from 'react';
+import { FlatList, SafeAreaView, StyleSheet, Text, View, Button, Image } from 'react-native';
+import CustomButton from './Components/CustomButton';
+import {getPokemons} from './Api/PokeApi';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+
+    const [color, showColor] = useState();
+    const [listPokemon, setListPokemon] = useState([...Array().keys()])
+
+    let nextPage = null
+
+    useEffect(() => {
+        getPokemons().then(datas => {
+            nextPage = datas.next
+            setListPokemon(datas.results)
+        })
+    }, [])
+
+    const renderItem = ({ item }) => {
+        return (
+            <View styles={styles.card}>
+                {/*<Image source={{url}}/>*/}
+                <Text>{item.name}</Text>
+            </View>
+        );
+    };
+
+    return (
+        <SafeAreaView style={styles.container}>
+            {
+                listPokemon?
+                    <FlatList
+                        data={listPokemon}
+                        renderItem={renderItem}
+                        keyExtractor={(item) => item.name}
+                        onEndReached={() =>{
+                                console.log('next')
+                                getPokemons(nextPage).then(datas => {
+                                    nextPage = datas.next
+                                    setListPokemon(datas.results)
+                                })
+                        }}
+                    />
+                    :
+                    <Text>Loading...</Text>
+            }
+        </SafeAreaView>
+
+    );
+
 }
 
 const styles = StyleSheet.create({
@@ -17,4 +59,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+    card: {
+      flex: 3
+    }
 });

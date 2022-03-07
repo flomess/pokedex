@@ -1,13 +1,14 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Button } from 'react-native';
 
-export default function CustomButton() {
+export default function CustomButton(props) {
+
+    const {color, text, showColor, ...restProps} = props
+
     return (
             <Button
-                onPress={onPressLearnMore}
-                title="Learn More"
-                color="#841584"
-                accessibilityLabel="Learn more about this purple button"
+                onPress={() => showColor(color)}
+                title={text}
+                color={color}
             />
     );
 }
