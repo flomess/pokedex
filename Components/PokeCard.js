@@ -27,7 +27,7 @@ export default function PokeCard(props){
                     </TouchableOpacity>
                 </View>
                 :
-                <View>
+                <View styles={styles.card}>
                     <Text>Loading...</Text>
                 </View>
     )

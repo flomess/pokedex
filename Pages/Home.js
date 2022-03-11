@@ -30,7 +30,6 @@ export default function Home(props){
     return (
         <SafeAreaView style={styles.container}>
             {
-                listPokemon?
                     <FlatList
                         horizontal={false}
                         numColumns={2}
@@ -42,8 +41,6 @@ export default function Home(props){
                             loadPokemon(nextPage)
                         }}
                     />
-                    :
-                    <Text>Loading...</Text>
             }
         </SafeAreaView>
 
