@@ -1,4 +1,4 @@
-import { View, StyleSheet, Image, Text, Button } from 'react-native';
+import { View, StyleSheet, Image, Text, Button, TouchableOpacity } from 'react-native';
 import { useState, useEffect } from 'react';
 import {getPokemons} from '../Api/PokeApi';
 
@@ -19,11 +19,12 @@ export default function PokeCard(props){
     return (
             !isLoading?
                 <View style={styles.card}>
-                    <Image style={styles.imgCard} source={{uri:pokemonDatas.sprites.front_default}} />
-                    <Text>{name}</Text>
-                    <Button title="Details" onPress={() => navigation.navigate('Details', {
+                    <TouchableOpacity style={styles.touchable} onPress={() => navigation.navigate('Details', {
                         pokemonDatas: pokemonDatas,
-                    })} />
+                    })}>
+                        <Image style={styles.imgCard} source={{uri:pokemonDatas.sprites.front_default}} />
+                        <Text>{name}</Text>
+                    </TouchableOpacity>
                 </View>
                 :
                 <View>
@@ -35,16 +36,20 @@ export default function PokeCard(props){
 
 const styles = StyleSheet.create({
     imgCard: {
-        width: 66,
-        height: 58,
-    },
-    card: {
-        margin: 20,
-        padding: 5,
         width: 100,
         height: 100,
+    },
+    card: {
+        margin: 'auto',
+        width: '50%',
+        height: 200,
         alignItems: 'center',
         justifyContent: 'center',
-        borderWidth: 2
+    },
+    touchable: {
+        alignItems: 'center',
+        padding: 5,
+        borderWidth: 1,
+        borderRadius: 5
     }
 });

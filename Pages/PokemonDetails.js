@@ -6,12 +6,16 @@ import {getPokemons} from '../Api/PokeApi';
 
 export default function PokemonDetails(props){
     const { navigation, route,  ...restProps } = props
-
+    const types = route.params.pokemonDatas.types
     return (
         <View style={styles.container}>
-            <Image style={styles.imgCard} source={{uri:route.params.pokemonDatas.sprites.front_default}} />
-            <Text>#{route.params.pokemonDatas.order} {route.params.pokemonDatas.name}</Text>
-            <Text>{route.params.pokemonDatas.types[0].type.name}</Text>
+            <Image style={styles.imgCard} source={{uri:route.params.pokemonDatas.sprites.other['official-artwork'].front_default}} />
+            <Text>#{route.params.pokemonDatas.id} {route.params.pokemonDatas.name}</Text>
+            <Text style={{flexDirection:'row', flexWrap:'wrap'}}>
+            {types.map(type => (
+                <Text>{type.type.name}&nbsp;</Text>
+            ))}
+            </Text>
         </View>
     )
 
@@ -27,5 +31,5 @@ const styles = StyleSheet.create({
     imgCard: {
         width: 200,
         height: 200,
-    }
+    },
 });

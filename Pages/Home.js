@@ -23,7 +23,7 @@ export default function Home(props){
 
     const renderItem = ({ item}) => {
         return (
-            <PokeCard url={item.url} name={item.name} navigation={navigation}></PokeCard>
+            <PokeCard style={styles.container} url={item.url} name={item.name} navigation={navigation}></PokeCard>
         );
     };
 
@@ -53,10 +53,10 @@ export default function Home(props){
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+        width: '100%',
     },
     imgCard: {
         width: 66,
