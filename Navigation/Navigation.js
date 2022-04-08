@@ -1,6 +1,7 @@
 import Home from '../Pages/Home';
 import PokemonDetails from '../Pages/PokemonDetails';
 import React from 'react';
+import MyTeam from '../Pages/MyTeam';
 import { Ionicons } from '@expo/vector-icons';
 import { FlatList, SafeAreaView, StyleSheet, Text, View, Button, Image } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -22,11 +23,24 @@ function PokemonStack(){
     )
 }
 
+function MyTeamStack(){
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="MyTeam" component={MyTeam} options={{
+                title:'My Team',
+                headerTitleAlign: 'center',
+            }}/>
+        </Stack.Navigator>
+    )
+}
+
 export default function Navigation(){
     return(
         <NavigationContainer>
             <Tab.Navigator>
                 <Tab.Screen name="Accueil" component={PokemonStack} options={{ headerShown: false, tabBarShowLabel: false, tabBarIcon: ({}) => {return <Ionicons name={'home'} size={24} color={'black'} />;
+                },}}/>
+                <Tab.Screen name="MyTeam" component={MyTeamStack} options={{ headerShown: false, tabBarShowLabel: false, tabBarIcon: ({}) => {return <Ionicons name={'ios-people'} size={24} color={'black'} />;
                 },}}/>
             </Tab.Navigator>
         </NavigationContainer>
