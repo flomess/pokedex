@@ -23,7 +23,7 @@ export default function PokeCard(props){
                         pokemonDatas: pokemonDatas,
                     })}>
                         <Image style={styles.imgCard} source={{uri:pokemonDatas.sprites.front_default}} />
-                        <Text>{name}</Text>
+                        <Text>{pokemonDatas.name}</Text>
                     </TouchableOpacity>
                 </View>
                 :
